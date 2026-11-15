@@ -267,6 +267,18 @@ CREATE TABLE CONFIGURACAO (
   PRIMARY KEY (chave)
 ) ENGINE=InnoDB;
 
+-- Acesso ao sistema (login): CPF + senha guardada em hash (nunca a senha pura).
+-- perfil: ADMIN = coordenacao, FUNCIONARIO = equipe, RESPONSAVEL = cliente que criou conta no site.
+-- Apagou a PESSOA, o acesso dela vai junto (CASCADE).
+CREATE TABLE ACESSO (
+  cpf        CHAR(11)     NOT NULL,
+  senha_hash VARCHAR(200) NOT NULL,
+  perfil     VARCHAR(12)  NOT NULL,
+  PRIMARY KEY (cpf),
+  CONSTRAINT fk_acesso_pessoa FOREIGN KEY (cpf) REFERENCES PESSOA (cpf) ON DELETE CASCADE,
+  CONSTRAINT ck_acesso_perfil CHECK (perfil IN ('ADMIN', 'FUNCIONARIO', 'RESPONSAVEL'))
+) ENGINE=InnoDB;
+
 -- Checklists pre e pos-evento
 CREATE TABLE CHECKLIST_EVENTO (
   cod_checklist INT          NOT NULL AUTO_INCREMENT,

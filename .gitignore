@@ -3,3 +3,4 @@ node_modules
 testar-db.js
 .DS_Store
 *.log
+data/acessos.json

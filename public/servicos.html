@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Serviços - Virando a Folha | Brinquedoteca Barreiro</title>
+  <link rel="icon" type="image/svg+xml" href="assets/comum/img/favicon.svg">
+  <link rel="stylesheet" href="assets/servicos/css/estilo.css">
+</head>
+<body class="carregando" data-pagina="servicos">
+  <main class="conteudo">
+    <header class="cabecalho-pagina">
+      <div>
+        <h1>Serviços</h1>
+        <p class="subtitulo">Catálogo do que pode ser contratado nas festas e eventos.</p>
+      </div>
+      <div class="acoes"><button type="button" class="btn btn-primario btn-grande" id="botaoNovo" hidden>Novo serviço</button></div>
+    </header>
+
+    <div class="cartao">
+      <div class="tabela-rolagem">
+        <table class="empilhar">
+          <thead><tr><th>Serviço</th><th>O que inclui</th><th class="direita">Valor</th><th></th></tr></thead>
+          <tbody id="lista"></tbody>
+        </table>
+      </div>
+      <div id="vazio" class="vazio" hidden><strong>Catálogo vazio</strong><p>Cadastre os serviços para poder usá-los nos orçamentos.</p></div>
+    </div>
+  </main>
+
+  <dialog id="dialogo">
+    <form class="dialogo-corpo" id="formulario">
+      <header><h2 id="tituloDialogo">Novo serviço</h2><button type="button" class="fechar" id="fechar" aria-label="Fechar">×</button></header>
+      <input type="hidden" id="cod_servico">
+      <div class="grade-form">
+        <label class="campo c12"><span>Nome</span><input type="text" id="nome" maxlength="100" required></label>
+        <label class="campo c12"><span>O que inclui</span><textarea id="descricao" rows="3" maxlength="255"></textarea></label>
+        <label class="campo c6"><span>Valor (R$)</span><input type="number" id="valor" min="0" step="0.01" required></label>
+      </div>
+      <div class="rodape-form" style="margin-top:0">
+        <button type="submit" class="btn btn-primario" id="botaoSalvar">Salvar serviço</button>
+        <button type="button" class="btn btn-suave" id="cancelar">Cancelar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="assets/comum/js/util.js"></script>
+  <script src="assets/comum/js/logo.js"></script>
+  <script src="assets/comum/js/layout.js"></script>
+  <script src="assets/servicos/js/script.js"></script>
+</body>
+</html>

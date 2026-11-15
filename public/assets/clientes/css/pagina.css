@@ -1,0 +1,14 @@
+/* regras só desta página */
+/* ---------- família (clientes) ---------- */
+.familia { padding: 0; overflow: hidden; }
+.familia + .familia { margin-top: 14px; }
+.familia-topo { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; padding: 18px 22px; }
+.familia-topo .avatar-familia { width: 48px; height: 48px; border-radius: 15px; display: grid; place-items: center; font-family: var(--fonte-titulo); font-weight: 800; font-size: 1.5rem; background: var(--cor-clara); color: var(--cor-escura); transform: rotate(-4deg); flex: none; }
+.familia-topo .dados { flex: 1; min-width: 200px; }
+.familia-criancas { display: flex; flex-wrap: wrap; gap: 10px; padding: 0 22px 20px; }
+.crianca-pilula { display: inline-flex; align-items: center; gap: 8px; padding: 6px 6px 6px 14px; border-radius: 999px; background: var(--cor-clara); color: var(--cor-escura); font-weight: 500; }
+.crianca-pilula button { border: 0; background: rgba(255, 255, 255, 0.7); border-radius: 999px; min-height: 30px; padding: 2px 12px; font: 500 0.85rem var(--fonte-texto); cursor: pointer; color: inherit; }
+.crianca-pilula button:hover { background: #fff; }
+
+
+

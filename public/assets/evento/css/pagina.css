@@ -1,0 +1,32 @@
+/* regras só desta página */
+/* ---------- passos do evento ---------- */
+.passos { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; list-style: none; }
+.passos li { max-width: none; }
+.passos button {
+  display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 6px 18px 6px 8px;
+  border-radius: 16px; border: 2px solid var(--linha); background: var(--papel); cursor: pointer; font: 500 1rem var(--fonte-texto); color: var(--tinta-suave);
+}
+.passos .bolinha { width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: var(--fundo); font-weight: 700; transform: rotate(-4deg); }
+.passos button[aria-current="step"] { border-color: var(--azul); color: var(--tinta); }
+.passos button[aria-current="step"] .bolinha { background: var(--azul); color: #fff; }
+.passos button.feito .bolinha { background: var(--verde); color: var(--tinta); }
+
+.linha-item { display: grid; grid-template-columns: minmax(0, 2fr) 100px 130px 110px 44px; gap: 10px; align-items: end; padding: 12px 0; border-bottom: 1px solid var(--linha); }
+.linha-equipe { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr) 130px 44px; gap: 10px; align-items: end; padding: 12px 0; border-bottom: 1px solid var(--linha); }
+.linha-item .total-linha { font-weight: 500; padding-bottom: 12px; text-align: right; }
+.btn-icone { width: 44px; padding: 0; }
+.total-geral { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-top: 18px; padding: 16px 20px; border-radius: 16px; background: var(--verde-claro); }
+.total-geral strong { font-family: var(--fonte-titulo); font-weight: 800; font-size: 2.2rem; color: var(--verde-escuro); }
+
+.checklist { list-style: none; display: grid; gap: 2px; }
+.checklist li { display: flex; align-items: center; gap: 10px; max-width: none; padding: 2px 0; }
+.checklist label { flex: 1; display: flex; gap: 12px; align-items: center; min-height: 44px; cursor: pointer; }
+.checklist input:checked + span { text-decoration: line-through; color: var(--tinta-suave); }
+.checklist .btn { opacity: 0.6; } .checklist .btn:hover { opacity: 1; }
+
+.resumo-evento { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; }
+.resumo-evento dt { font-size: 0.85rem; color: var(--tinta-suave); }
+.resumo-evento dd { font-weight: 500; }
+
+
+

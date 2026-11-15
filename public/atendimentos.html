@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atendimentos - Virando a Folha | Brinquedoteca Barreiro</title>
+  <link rel="icon" type="image/svg+xml" href="assets/comum/img/favicon.svg">
+  <link rel="stylesheet" href="assets/atendimentos/css/estilo.css">
+</head>
+<body class="carregando" data-pagina="atendimentos">
+  <main class="conteudo">
+    <header class="cabecalho-pagina">
+      <div>
+        <h1>Atendimentos</h1>
+        <p class="subtitulo">Entrada, saída, cobrança e pagamento de cada criança.</p>
+      </div>
+    </header>
+
+    <div class="abas" role="tablist" aria-label="Seções de atendimentos">
+      <button type="button" role="tab" id="aba-agora" aria-controls="painel-agora" aria-selected="true">Na brinquedoteca</button>
+      <button type="button" role="tab" id="aba-calculadora" aria-controls="painel-calculadora" aria-selected="false">Calculadora de valor</button>
+      <button type="button" role="tab" id="aba-historico" aria-controls="painel-historico" aria-selected="false">Histórico</button>
+    </div>
+
+    <!-- ===== ABA 1: entrada e saída ===== -->
+    <section class="painel-aba" id="painel-agora" role="tabpanel" aria-labelledby="aba-agora">
+      <div class="coluna-dupla">
+        <div class="cartao">
+          <div class="cartao-cabecalho">
+            <div>
+              <h2>Registrar entrada</h2>
+              <p>O horário é marcado automaticamente.</p>
+            </div>
+          </div>
+          <form id="formEntrada">
+            <div class="grade-form">
+              <label class="campo c12">
+                <span>Criança</span>
+                <select id="crianca" required>
+                  <option value="">Escolha a criança que chegou</option>
+                </select>
+                <small>Não achou? <a href="cadastro.html">Faça o cadastro da família</a> primeiro.</small>
+              </label>
+              <label class="campo c12">
+                <span>Recepcionista</span>
+                <select id="recepcionista" required></select>
+              </label>
+              <fieldset class="campo c12" style="border:0">
+                <legend class="rotulo" style="margin-bottom:4px">Monitores que vão acompanhar</legend>
+                <div class="opcoes" id="monitores"></div>
+              </fieldset>
+            </div>
+            <div class="rodape-form">
+              <button type="submit" class="btn btn-ok btn-grande" id="botaoEntrada">Registrar entrada</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="cartao">
+          <div class="cartao-cabecalho">
+            <div>
+              <h2>Brincando agora</h2>
+              <p id="resumoAgora">Carregando…</p>
+            </div>
+          </div>
+          <div id="agora"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ABA 2: calculadora ===== -->
+    <section class="painel-aba" id="painel-calculadora" role="tabpanel" aria-labelledby="aba-calculadora" hidden>
+      <div class="calculadora">
+        <div class="cartao">
+          <div class="cartao-cabecalho">
+            <div>
+              <h2>Quanto fica?</h2>
+              <p>Informe a entrada e a saída. O valor se atualiza sozinho.</p>
+            </div>
+          </div>
+          <div class="grade-form">
+            <label class="campo c6"><span>Entrada</span><input type="time" id="calcEntrada"></label>
+            <label class="campo c6"><span>Saída</span><input type="time" id="calcSaida"></label>
+            <label class="campo c12">
+              <span>Usar uma criança que está aqui agora</span>
+              <select id="calcCrianca"><option value="">Digitar os horários manualmente</option></select>
+            </label>
+          </div>
+          <label class="opcao" style="margin-top:16px"><input type="checkbox" id="calcIrmaos"> Irmãos (5% de desconto no valor da hora)</label>
+          <div id="calcErro" class="aviso erro" style="margin-top:16px" hidden></div>
+          <p class="aviso" id="regra" style="margin-top:20px"></p>
+        </div>
+
+        <div class="resultado-calculo" aria-live="polite">
+          <span class="nome-forte">Valor a cobrar</span>
+          <span class="grande numero" id="calcValor">R$ 0,00</span>
+          <dl id="calcDetalhe"></dl>
+        </div>
+      </div>
+
+      <div class="coluna-dupla" style="margin-top:24px">
+        <div class="cartao">
+          <div class="cartao-cabecalho"><div><h2>Tabela rápida</h2><p>Para consultar sem digitar nada.</p></div></div>
+          <div class="tabela-rolagem">
+            <table>
+              <thead><tr><th>Tempo</th><th class="direita">Valor</th></tr></thead>
+              <tbody id="tabelaRapida"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="cartao" id="cartaoPreco">
+          <div class="cartao-cabecalho"><div><h2>Tabela de preços</h2><p>O valor da hora depende do tempo total da visita. O tempo é contado por minuto.</p></div></div>
+          <div class="tabela-rolagem">
+            <table>
+              <thead><tr><th>Tempo da visita</th><th class="direita">Valor da hora</th></tr></thead>
+              <tbody id="tabelaFaixas"></tbody>
+            </table>
+          </div>
+          <p class="suave pequeno" id="notaIrmaos" style="margin-top:12px"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ABA 3: histórico ===== -->
+    <section class="painel-aba" id="painel-historico" role="tabpanel" aria-labelledby="aba-historico" hidden>
+      <div class="cartao">
+        <div class="busca">
+          <label class="campo" style="max-width:280px">
+            <span>Mostrar</span>
+            <select id="filtroHistorico">
+              <option value="hoje">Hoje</option>
+              <option value="pendentes">Pagamento pendente</option>
+              <option value="todos">Todos os atendimentos</option>
+            </select>
+          </label>
+        </div>
+        <div class="tabela-rolagem">
+          <table class="empilhar">
+            <thead>
+              <tr><th>Data</th><th>Criança</th><th>Responsável</th><th>Entrada – saída</th><th class="direita">Valor</th><th>Pagamento</th><th></th></tr>
+            </thead>
+            <tbody id="historico"></tbody>
+          </table>
+        </div>
+        <div id="historicoVazio" class="vazio" hidden><strong>Nada por aqui</strong><p>Nenhum atendimento neste filtro.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="dialogo"><div class="dialogo-corpo" id="dialogoCorpo"></div></dialog>
+
+  <script src="assets/comum/js/util.js"></script>
+  <script src="assets/comum/js/logo.js"></script>
+  <script src="assets/comum/js/layout.js"></script>
+  <script src="assets/atendimentos/js/script.js"></script>
+</body>
+</html>

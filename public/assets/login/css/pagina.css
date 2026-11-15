@@ -1,0 +1,20 @@
+/* regras só desta página */
+/* ---------- entrada (login) ---------- */
+.entrada { min-height: 100vh; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
+.entrada-marca { display: grid; place-items: center; padding: 40px; background: var(--fundo); }
+.entrada-marca .miolo { display: grid; justify-items: center; gap: 22px; text-align: center; }
+.entrada-marca .marca-casa { width: clamp(110px, 14vw, 170px); height: auto; }
+.entrada-marca .palavra { font-size: clamp(1rem, 2.4vw, 2.4rem); }
+.entrada-marca .lema { font-weight: 400; letter-spacing: 0.16em; font-size: clamp(0.8rem, 1.2vw, 1rem); }
+.entrada-marca .projeto { margin-top: 24px; font-family: var(--fonte-titulo); font-weight: 800; font-size: clamp(1.6rem, 2.6vw, 2.2rem); color: var(--azul-escuro); }
+.entrada-form { display: grid; place-items: center; padding: 40px; background: var(--azul); position: relative; overflow: hidden; }
+.entrada-form::before, .entrada-form::after { content: ""; position: absolute; border-radius: 40px; opacity: 0.9; }
+.entrada-form::before { width: 190px; height: 190px; background: var(--verde); left: -70px; top: -60px; transform: rotate(18deg); }
+.entrada-form::after { width: 150px; height: 150px; background: var(--amarelo); right: -50px; bottom: -40px; transform: rotate(-14deg); }
+.entrada-cartao { position: relative; z-index: 1; width: min(420px, 100%); background: var(--papel); border-radius: 24px; padding: 34px; display: grid; gap: 20px; box-shadow: 0 30px 60px -24px rgba(20, 30, 55, 0.6); }
+.entrada-cartao h1 { font-size: 2.6rem; }
+.entrada-cartao .dica { font-size: 0.85rem; color: var(--tinta-suave); padding: 12px 14px; background: var(--fundo); border-radius: 12px; }
+
+
+.link-conta { text-align: center; font-size: 0.95rem; color: var(--tinta-suave); }
+.link-conta a { color: var(--azul-escuro); font-weight: 500; }

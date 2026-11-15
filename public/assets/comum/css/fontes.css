@@ -1,0 +1,33 @@
+/* Fontes da marca, servidas pelo próprio projeto (nada de Google Fonts).
+   Rubik = textos e subtítulos (Light 300 e Regular 400 da identidade visual).
+   Títulos = Jennies House. Como é uma fonte paga/avulsa, coloque o arquivo dela em
+   public/assets/comum/fonts/ com o nome JenniesHouse.woff2 (ou .otf/.ttf). Enquanto ela não estiver
+   lá, os títulos usam a Barlow Condensed (condensada e pesada, parecida no peso). */
+
+@font-face { font-family: "Rubik"; font-weight: 300; font-style: normal; font-display: swap;
+  src: url("../fonts/rubik-latin-300-normal.woff2") format("woff2"); }
+@font-face { font-family: "Rubik"; font-weight: 400; font-style: normal; font-display: swap;
+  src: url("../fonts/rubik-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Rubik"; font-weight: 500; font-style: normal; font-display: swap;
+  src: url("../fonts/rubik-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Rubik"; font-weight: 700; font-style: normal; font-display: swap;
+  src: url("../fonts/rubik-latin-700-normal.woff2") format("woff2"); }
+
+@font-face { font-family: "Barlow Condensed"; font-weight: 700; font-style: normal; font-display: swap;
+  src: url("../fonts/barlow-condensed-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Barlow Condensed"; font-weight: 800; font-style: normal; font-display: swap;
+  src: url("../fonts/barlow-condensed-latin-800-normal.woff2") format("woff2"); }
+
+/* Jennies House: se a fonte estiver INSTALADA no computador, já vale (local).
+   Para valer em qualquer computador, copie o arquivo para public/assets/comum/fonts/ e tire os
+   comentários das linhas "url(...)" abaixo (deixei comentado para o navegador não
+   reclamar de arquivo inexistente enquanto você não a tiver). */
+@font-face { font-family: "Jennies House"; font-weight: 400 900; font-style: normal; font-display: swap;
+  src: local("Jennies House"), local("JenniesHouse"); }
+/*
+@font-face { font-family: "Jennies House"; font-weight: 400 900; font-style: normal; font-display: swap;
+  src: local("Jennies House"), local("JenniesHouse"),
+       url("../fonts/JenniesHouse.woff2") format("woff2"),
+       url("../fonts/JenniesHouse.otf") format("opentype"),
+       url("../fonts/JenniesHouse.ttf") format("truetype"); }
+*/

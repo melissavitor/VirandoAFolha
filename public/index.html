@@ -1,14 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Virando a Folha</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Início - Virando a Folha | Brinquedoteca Barreiro</title>
+  <link rel="icon" type="image/svg+xml" href="assets/comum/img/favicon.svg">
+  <link rel="stylesheet" href="assets/index/css/estilo.css">
 </head>
-<body>
-    <h1>Serviços</h1>
-  <ul id="lista"></ul>
-  <script src="script.js"></script>
+<body class="carregando" data-pagina="inicio">
+  <main class="conteudo">
+    <header class="saudacao">
+      <h1 id="saudacao">Olá!</h1>
+      <p class="subtitulo" id="dataHoje"></p>
+    </header>
+
+    <div id="areaResponsavel" hidden>
+      <nav class="atalhos" aria-label="Atalhos do responsável">
+        <a class="atalho cor-coral" href="cadastro.html?nova=1"><span class="icone" id="ir1"></span>Cadastrar criança</a>
+        <a class="atalho cor-laranja" href="evento.html"><span class="icone" id="ir2"></span>Solicitar evento</a>
+        <a class="atalho cor-azul" href="cadastro.html"><span class="icone" id="ir3"></span>Meus dados</a>
+      </nav>
+      <div class="coluna-dupla">
+        <section class="cartao" aria-labelledby="tMinhasCriancas">
+          <div class="cartao-cabecalho">
+            <div><h2 id="tMinhasCriancas">Minhas crianças</h2></div>
+            <a class="btn btn-suave btn-pequeno" href="cadastro.html">Editar</a>
+          </div>
+          <div id="minhasCriancas"></div>
+        </section>
+        <section class="cartao" aria-labelledby="tMeusEventos">
+          <div class="cartao-cabecalho">
+            <div><h2 id="tMeusEventos">Meus eventos</h2></div>
+            <a class="btn btn-suave btn-pequeno" href="eventos.html">Ver todos</a>
+          </div>
+          <div id="meusEventos"></div>
+        </section>
+      </div>
+    </div>
+
+    <div id="areaEquipe">
+    <nav class="atalhos" aria-label="Atalhos">
+      <a class="atalho cor-verde" href="atendimentos.html"><span class="icone" id="ic1"></span>Registrar entrada</a>
+      <a class="atalho cor-amarelo" href="atendimentos.html#calculadora"><span class="icone" id="ic2"></span>Calcular valor</a>
+      <a class="atalho cor-coral" href="cadastro.html"><span class="icone" id="ic3"></span>Novo cadastro</a>
+      <a class="atalho cor-laranja" href="evento.html"><span class="icone" id="ic4"></span>Novo evento</a>
+    </nav>
+
+    <section class="numeros" aria-label="Resumo do dia">
+      <a class="numero-bloco cor-verde" href="atendimentos.html"><strong id="nAndamento">–</strong><span>na brinquedoteca agora</span></a>
+      <a class="numero-bloco cor-coral" href="atendimentos.html#historico"><strong id="nReceber">–</strong><span id="rReceber">a receber</span></a>
+      <a class="numero-bloco cor-laranja" href="eventos.html"><strong id="nConfirmados">–</strong><span>eventos confirmados</span></a>
+      <a class="numero-bloco cor-lilas" href="eventos.html"><strong id="nOrcamentos">–</strong><span>orçamentos em aberto</span></a>
+    </section>
+
+    <section class="cartao" id="cartaoEscala" aria-labelledby="tEscala" hidden style="margin-bottom:24px">
+      <div class="cartao-cabecalho">
+        <div><h2 id="tEscala">Minha escala</h2><p>Festas em que você está escalado, com o horário de chegada e o checklist.</p></div>
+      </div>
+      <div id="escala"></div>
+    </section>
+
+    <div class="coluna-dupla">
+      <section class="cartao" aria-labelledby="tAgora">
+        <div class="cartao-cabecalho">
+          <div>
+            <h2 id="tAgora">Brincando agora</h2>
+            <p>Valor parcial, se a criança saísse neste instante.</p>
+          </div>
+          <a class="btn btn-suave btn-pequeno" href="atendimentos.html">Ver atendimentos</a>
+        </div>
+        <div id="agora"></div>
+      </section>
+
+      <section class="cartao" aria-labelledby="tEventos">
+        <div class="cartao-cabecalho">
+          <div>
+            <h2 id="tEventos">Próximos eventos</h2>
+          </div>
+          <a class="btn btn-suave btn-pequeno" href="eventos.html">Ver todos</a>
+        </div>
+        <div id="eventos"></div>
+      </section>
+    </div>
+    </div>
+  </main>
+
+  <script src="assets/comum/js/util.js"></script>
+  <script src="assets/comum/js/logo.js"></script>
+  <script src="assets/comum/js/layout.js"></script>
+  <script src="assets/index/js/script.js"></script>
 </body>
 </html>

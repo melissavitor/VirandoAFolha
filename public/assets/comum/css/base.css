@@ -1,0 +1,102 @@
+/* =====================================================================
+   Virando a Folha - Brinquedoteca Barreiro
+   Sistema visual baseado na identidade visual (Personalizza Design).
+   Tudo que é cor, fonte e arredondado está nas variáveis do :root.
+   ===================================================================== */
+
+:root {
+  /* paleta da marca */
+  --verde: #679B72;
+  --coral: #E86F63;
+  --amarelo: #EDC047;
+  --lilas: #8F80A8;
+  --laranja: #FEA85B;
+  --azul: #516E9E;
+  --fundo: #FCFBF8;
+  --papel: #FFFFFF;
+
+  /* tons escuros (para texto sobre fundo claro: as cores puras não têm contraste) */
+  --tinta: #26324D;
+  --tinta-suave: #5A6580;
+  --verde-escuro: #3E6B4A;
+  --coral-escuro: #B23F32;
+  --amarelo-escuro: #765800;
+  --lilas-escuro: #5D4E78;
+  --laranja-escuro: #8A4A09;
+  --azul-escuro: #3A5483;
+
+  /* tons claros (fundos de selo, destaque e linhas) */
+  --verde-claro: #E7F1E9;
+  --coral-claro: #FCE6E3;
+  --amarelo-claro: #FBF1D3;
+  --lilas-claro: #EFECF4;
+  --laranja-claro: #FFECD9;
+  --azul-claro: #E7ECF4;
+  --linha: #E8E4DB;
+
+  --fonte-titulo: "Jennies House", "Barlow Condensed", "Arial Narrow", sans-serif;
+  --fonte-texto: "Rubik", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --raio: 16px;
+  --raio-pequeno: 10px;
+  --sombra: 0 2px 0 rgba(38, 50, 77, 0.05), 0 12px 28px -18px rgba(38, 50, 77, 0.35);
+  --largura-menu: 252px;
+
+  /* cor de destaque padrão; qualquer elemento com .cor-verde, .cor-coral... troca as três */
+  --cor: var(--azul); --cor-clara: var(--azul-claro); --cor-escura: var(--azul-escuro);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--fonte-texto);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--tinta);
+  background: var(--fundo);
+}
+body.carregando { visibility: hidden; }
+
+h1, h2, h3 { font-family: var(--fonte-titulo); font-weight: 800; line-height: 1.05; letter-spacing: 0.01em; }
+h1 { font-size: clamp(2.3rem, 5vw, 3.4rem); }
+h2 { font-size: 1.7rem; }
+h3 { font-size: 1.25rem; }
+p, li { max-width: 70ch; }
+.subtitulo { font-weight: 300; font-size: 1.1rem; color: var(--tinta-suave); }
+.suave { color: var(--tinta-suave); }
+.pequeno { font-size: 0.875rem; }
+.numero { font-variant-numeric: tabular-nums; }
+
+a { color: var(--azul-escuro); }
+
+:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; border-radius: 6px; }
+
+/* ---------- logo ---------- */
+.marca-casa { display: block; overflow: visible; }
+.palavra { display: inline-flex; gap: 0.18em; font-size: 2.1rem; line-height: 1; }
+.palavra b {
+  display: grid; place-items: center;
+  width: 1.12em; height: 1.2em;
+  border-radius: 0.28em;
+  font-family: var(--fonte-texto); font-weight: 700; font-size: 1em;
+  color: #fff;
+  transform: rotate(var(--giro, 0deg));
+}
+.palavra b:nth-child(1)  { background: var(--azul);    --giro: -3deg; }
+.palavra b:nth-child(2)  { background: var(--verde);   --giro: 2deg; }
+.palavra b:nth-child(3)  { background: var(--amarelo); --giro: -2deg; }
+.palavra b:nth-child(4)  { background: var(--lilas);   --giro: 3deg; }
+.palavra b:nth-child(5)  { background: var(--laranja); --giro: -3deg; }
+.palavra b:nth-child(6)  { background: var(--coral);   --giro: 2deg; }
+.palavra b:nth-child(7)  { background: var(--azul);    --giro: -2deg; }
+.palavra b:nth-child(8)  { background: var(--verde);   --giro: 3deg; }
+.palavra b:nth-child(9)  { background: var(--amarelo); --giro: -3deg; }
+.palavra b:nth-child(10) { background: var(--lilas);   --giro: 2deg; }
+.palavra b:nth-child(11) { background: var(--laranja); --giro: -2deg; }
+.palavra b:nth-child(12) { background: var(--coral);   --giro: 3deg; }
+.palavra b:nth-child(13) { background: var(--azul);    --giro: -3deg; }
+

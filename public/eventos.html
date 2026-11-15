@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eventos - Virando a Folha | Brinquedoteca Barreiro</title>
+  <link rel="icon" type="image/svg+xml" href="assets/comum/img/favicon.svg">
+  <link rel="stylesheet" href="assets/eventos/css/estilo.css">
+</head>
+<body class="carregando" data-pagina="eventos">
+  <main class="conteudo">
+    <header class="cabecalho-pagina">
+      <div>
+        <h1>Eventos</h1>
+        <p class="subtitulo">Orçamentos e festas: do primeiro contato ao pós-evento.</p>
+      </div>
+      <div class="acoes"><a class="btn btn-primario btn-grande" href="evento.html">Novo evento</a></div>
+    </header>
+
+    <div class="abas" role="tablist" aria-label="Filtrar eventos" id="filtros">
+      <button type="button" role="tab" data-filtro="" aria-selected="true">Todos</button>
+      <button type="button" role="tab" data-filtro="ORCAMENTO" aria-selected="false">Orçamentos</button>
+      <button type="button" role="tab" data-filtro="CONFIRMADO" aria-selected="false">Confirmados</button>
+      <button type="button" role="tab" data-filtro="CANCELADO" aria-selected="false">Cancelados</button>
+    </div>
+
+    <div class="cartao">
+      <div class="tabela-rolagem">
+        <table class="empilhar">
+          <thead><tr><th>Data</th><th>Tema</th><th>Responsável</th><th>Convidados</th><th class="direita">Valor</th><th>Situação</th><th></th></tr></thead>
+          <tbody id="lista"></tbody>
+        </table>
+      </div>
+      <div id="vazio" class="vazio" hidden>
+        <strong>Nenhum evento aqui</strong>
+        <p>Crie um orçamento para começar. Depois de aprovado, é só confirmar.</p>
+        <a class="btn btn-primario" href="evento.html">Novo evento</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="assets/comum/js/util.js"></script>
+  <script src="assets/comum/js/logo.js"></script>
+  <script src="assets/comum/js/layout.js"></script>
+  <script src="assets/eventos/js/script.js"></script>
+</body>
+</html>

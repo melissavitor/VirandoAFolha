@@ -139,3 +139,13 @@ INSERT INTO CHECKLIST_EVENTO (cod_evento, tipo, item, concluido) VALUES
 (1, 'POS', 'Recolher decoracao',                    FALSE),
 (1, 'POS', 'Higienizar o espaco',                   FALSE),
 (2, 'PRE', 'Confirmar chegada do personagem',       FALSE);
+
+-- ---------------------------------------------------------------------
+-- ACESSO: login dos 4 funcionarios do seed (senha de todos: folha123).
+-- O que esta gravado e o HASH da senha, nao a senha. Troque depois em Funcionarios.
+-- ---------------------------------------------------------------------
+INSERT INTO ACESSO (cpf, senha_hash, perfil) VALUES
+('22233344401', '333c1d8ff34ed78935522fae90942997:1fc36e834eb5e4aad90d8ab2f084b4dad61c48ba06df2e232ef0eda3b9ac4e52ca0c9466c054bfd109f9688d56e08a336818fbca40ee51efca06683bd75df8be', 'ADMIN'),
+('22233344402', '333c1d8ff34ed78935522fae90942997:1fc36e834eb5e4aad90d8ab2f084b4dad61c48ba06df2e232ef0eda3b9ac4e52ca0c9466c054bfd109f9688d56e08a336818fbca40ee51efca06683bd75df8be', 'FUNCIONARIO'),
+('22233344403', '333c1d8ff34ed78935522fae90942997:1fc36e834eb5e4aad90d8ab2f084b4dad61c48ba06df2e232ef0eda3b9ac4e52ca0c9466c054bfd109f9688d56e08a336818fbca40ee51efca06683bd75df8be', 'FUNCIONARIO'),
+('22233344404', '333c1d8ff34ed78935522fae90942997:1fc36e834eb5e4aad90d8ab2f084b4dad61c48ba06df2e232ef0eda3b9ac4e52ca0c9466c054bfd109f9688d56e08a336818fbca40ee51efca06683bd75df8be', 'FUNCIONARIO');

@@ -1,0 +1,5 @@
+/* regras só desta página (o resto vem da tela de login) */
+.entrada-form { align-items: start; }
+.conta-cartao { width: min(560px, 100%); }
+.conta-cartao h1 { font-size: 2.2rem; }
+@media (max-width: 860px) { .entrada-marca { padding: 24px; } .entrada-marca .miolo { gap: 12px; } }

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clientes - Virando a Folha | Brinquedoteca Barreiro</title>
+  <link rel="icon" type="image/svg+xml" href="assets/comum/img/favicon.svg">
+  <link rel="stylesheet" href="assets/clientes/css/estilo.css">
+</head>
+<body class="carregando" data-pagina="clientes">
+  <main class="conteudo">
+    <header class="cabecalho-pagina">
+      <div>
+        <h1>Clientes</h1>
+        <p class="subtitulo" id="resumo">Responsáveis e as crianças de cada família.</p>
+      </div>
+      <div class="acoes"><a class="btn btn-primario btn-grande" href="cadastro.html">Novo cadastro</a></div>
+    </header>
+
+    <div class="busca">
+      <label class="campo" style="width:min(420px,100%)">
+        <span>Buscar</span>
+        <input type="search" id="busca" placeholder="Nome, CPF, telefone ou nome da criança">
+      </label>
+    </div>
+
+    <div id="lista" aria-live="polite"></div>
+  </main>
+
+  <script src="assets/comum/js/util.js"></script>
+  <script src="assets/comum/js/logo.js"></script>
+  <script src="assets/comum/js/layout.js"></script>
+  <script src="assets/clientes/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+/* regras só desta página */
+/* ---------- calculadora ---------- */
+.calculadora { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; }
+.resultado-calculo {
+  display: grid; align-content: center; gap: 6px; padding: 28px; border-radius: 20px;
+  background: var(--amarelo-claro); position: relative; overflow: hidden; min-height: 260px;
+}
+.resultado-calculo::before { content: ""; position: absolute; right: -30px; bottom: -30px; width: 120px; height: 120px; border-radius: 34px; background: var(--amarelo); transform: rotate(14deg); opacity: 0.85; }
+.resultado-calculo > * { position: relative; z-index: 1; }
+.resultado-calculo .grande { font-family: var(--fonte-titulo); font-weight: 800; font-size: clamp(3.4rem, 8vw, 5rem); line-height: 0.95; }
+.resultado-calculo dl { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; margin-top: 10px; }
+.resultado-calculo dt { color: var(--amarelo-escuro); font-weight: 500; }
+.resultado-calculo dd { text-align: right; font-variant-numeric: tabular-nums; }
+
+

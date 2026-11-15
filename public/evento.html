@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evento - Virando a Folha | Brinquedoteca Barreiro</title>
+  <link rel="icon" type="image/svg+xml" href="assets/comum/img/favicon.svg">
+  <link rel="stylesheet" href="assets/evento/css/estilo.css">
+</head>
+<body class="carregando" data-pagina="eventos">
+  <main class="conteudo">
+    <header class="cabecalho-pagina">
+      <div>
+        <h1 id="titulo">Novo evento</h1>
+        <p class="subtitulo" id="subtitulo">Monte o orçamento: dados da festa, briefing, serviços e equipe.</p>
+        <p style="margin-top:12px"><span class="selo" id="selo" hidden></span></p>
+      </div>
+      <div class="acoes" id="acoesStatus">
+        <a class="btn btn-suave" href="eventos.html">Voltar para eventos</a>
+      </div>
+    </header>
+
+    <ol class="passos" id="passos" aria-label="Etapas do evento"></ol>
+
+    <form id="formulario" novalidate>
+      <fieldset id="campos" style="border:0;min-width:0">
+
+        <!-- 1 -->
+        <section class="cartao" id="passo-1" data-passo="1">
+          <div class="cartao-cabecalho"><div><h2>Dados da festa</h2><p>Quem contratou, quando e onde acontece.</p></div></div>
+          <div class="grade-form">
+            <label class="campo c6"><span>Responsável</span>
+              <select id="cod_responsavel" required><option value="">Escolha o responsável</option></select>
+              <small>Ainda não é cliente? <a href="cadastro.html">Faça o cadastro</a>.</small></label>
+            <label class="campo c3"><span>Data</span><input type="date" id="data" required></label>
+            <label class="campo c3"><span>Horário</span><input type="time" id="horario" required></label>
+            <label class="campo c3"><span>Convidados</span><input type="number" id="qtd_convidados" min="1" required></label>
+            <p class="aviso c12" id="avisoAgenda" hidden></p>
+            <div class="campo c12" style="flex-direction:row;align-items:center;gap:12px;flex-wrap:wrap">
+              <span class="rotulo">Endereço da festa</span>
+              <button type="button" class="btn btn-suave btn-pequeno" id="usarEndereco">Usar o endereço do responsável</button>
+            </div>
+            <label class="campo c6"><span>Rua</span><input type="text" id="rua" required></label>
+            <label class="campo c2"><span>Número</span><input type="text" id="numero" required></label>
+            <label class="campo c4"><span>Bairro</span><input type="text" id="bairro" required></label>
+            <label class="campo c6"><span>Cidade</span><input type="text" id="cidade" value="Belo Horizonte" required></label>
+          </div>
+        </section>
+
+        <!-- 2 -->
+        <section class="cartao" id="passo-2" data-passo="2" hidden>
+          <div class="cartao-cabecalho"><div><h2>Ficha de briefing</h2><p>O que a família sonha para a festa.</p></div></div>
+          <div class="grade-form">
+            <label class="campo c8"><span>Tema</span><input type="text" id="tema" placeholder="Ex.: Fundo do Mar" required></label>
+            <label class="campo c12"><span>Observações</span><textarea id="observacoes" rows="4" placeholder="Alergias, faixa etária, surpresas, cores preferidas…"></textarea></label>
+          </div>
+        </section>
+
+        <!-- 3 -->
+        <section class="cartao" id="passo-3" data-passo="3" hidden>
+          <div class="cartao-cabecalho">
+            <div><h2>Serviços contratados</h2><p>O valor vem do catálogo, mas pode ser ajustado para este evento.</p></div>
+            <button type="button" class="btn btn-suave" id="addServico">Adicionar serviço</button>
+          </div>
+          <div id="servicos"></div>
+          <div class="total-geral"><span class="nome-forte">Total do orçamento</span><strong class="numero" id="total">R$ 0,00</strong></div>
+        </section>
+
+        <!-- 4 -->
+        <section class="cartao" id="passo-4" data-passo="4" hidden>
+          <div class="cartao-cabecalho">
+            <div><h2>Equipe escalada</h2><p>Quem trabalha na festa e a partir de que horas.</p></div>
+            <button type="button" class="btn btn-suave" id="addEquipe">Adicionar pessoa</button>
+          </div>
+          <div id="equipe"></div>
+          <p class="vazio" id="equipeVazia" style="padding:12px">Ninguém escalado ainda. Dá para fazer isso depois.</p>
+        </section>
+      </fieldset>
+
+      <div class="rodape-form" id="rodapePassos">
+        <button type="button" class="btn btn-suave btn-grande" id="voltar">Voltar</button>
+        <button type="button" class="btn btn-primario btn-grande" id="proximo">Próximo</button>
+        <button type="submit" class="btn btn-ok btn-grande" id="salvar">Salvar orçamento</button>
+      </div>
+    </form>
+
+    <section id="areaEquipeLeitura" hidden style="margin-top:32px">
+      <div class="cartao">
+        <div class="cartao-cabecalho"><div><h2>Equipe da festa</h2><p>Quem vai trabalhar no seu evento e a que horas chega.</p></div></div>
+        <div id="equipeLeitura"></div>
+      </div>
+    </section>
+
+    <section id="areaChecklist" hidden style="margin-top:32px">
+      <div class="cartao">
+        <div class="cartao-cabecalho"><div><h2>Checklists do evento</h2><p>Marque conforme o evento avança.</p></div></div>
+        <div class="duas-colunas">
+          <div><h3>Antes da festa</h3><ul class="checklist" id="listaPRE"></ul>
+            <form class="busca" data-novo="PRE" style="margin:12px 0 0"><input type="text" placeholder="Novo item" aria-label="Novo item antes da festa"><button class="btn btn-suave btn-pequeno">Adicionar</button></form></div>
+          <div><h3>Depois da festa</h3><ul class="checklist" id="listaPOS"></ul>
+            <form class="busca" data-novo="POS" style="margin:12px 0 0"><input type="text" placeholder="Novo item" aria-label="Novo item depois da festa"><button class="btn btn-suave btn-pequeno">Adicionar</button></form></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/comum/js/util.js"></script>
+  <script src="assets/comum/js/logo.js"></script>
+  <script src="assets/comum/js/layout.js"></script>
+  <script src="assets/evento/js/script.js"></script>
+</body>
+</html>

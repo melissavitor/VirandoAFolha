@@ -1,0 +1,23 @@
+/* regras só desta página */
+/* ---------- painel inicial ---------- */
+.saudacao { margin-bottom: 28px; }
+.numeros { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-bottom: 24px; }
+.numero-bloco {
+  display: grid; gap: 4px; padding: 18px 20px; border-radius: var(--raio);
+  background: var(--cor-clara); color: var(--cor-escura); text-decoration: none; position: relative; overflow: hidden;
+  border: 2px solid transparent;
+}
+a.numero-bloco:hover { border-color: var(--cor); }
+.numero-bloco::after { content: ""; position: absolute; right: -14px; top: -14px; width: 56px; height: 56px; border-radius: 18px; background: var(--cor); opacity: 0.9; transform: rotate(18deg); }
+.numero-bloco strong { font-family: var(--fonte-titulo); font-weight: 800; font-size: 2.6rem; line-height: 1; color: var(--tinta); position: relative; z-index: 1; }
+.numero-bloco span { font-weight: 500; font-size: 0.95rem; position: relative; z-index: 1; }
+
+
+
+.atalhos { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.atalho { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 16px; background: var(--papel); border: 1px solid var(--linha); text-decoration: none; color: var(--tinta); font-weight: 500; box-shadow: var(--sombra); }
+.atalho:hover { border-color: var(--cor); }
+.atalho .icone { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--cor); color: var(--tinta); transform: rotate(-4deg); flex: none; }
+.atalho svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+
