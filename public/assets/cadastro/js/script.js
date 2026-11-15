@@ -47,6 +47,18 @@ function adicionarCrianca(dados = {}) {
   return bloco;
 }
 
+// criança de outro responsável em que esta pessoa é o segundo responsável (só leitura)
+function mostrarCriancaCompartilhada(f) {
+  const bloco = document.createElement("div");
+  bloco.className = "bloco-crianca";
+  bloco.innerHTML = `
+    <div class="bloco-crianca-topo"><h3>${escapar(f.nome)}</h3><span class="selo cor-lilas">Você é o segundo responsável</span></div>
+    <p class="suave" style="margin:0">${idadeTexto(f.data_nascimento)} · Responsável principal: ${escapar(f.responsavel_nome)}</p>
+    ${f.observacoes ? `<p style="margin:8px 0 0">${escapar(f.observacoes)}</p>` : ""}
+    <p class="suave pequeno" style="margin:8px 0 0">Só o responsável principal pode alterar os dados desta criança.</p>`;
+  document.getElementById("criancas").appendChild(bloco);
+}
+
 // ---- segundo responsável (cada criança pode ter até 2 responsáveis) ----
 function configurarSegundoResponsavel(bloco, dados) {
   const codCrianca = () => bloco.dataset.num;
@@ -260,6 +272,8 @@ document.getElementById("formulario").addEventListener("submit", async (e) => {
       const filhos = await chamarApi("/criancas?responsavel=" + codEdicao);
       // aqui só as crianças deste responsável (as em que ele é o 2º responsável ficam só para consulta)
       filhos.filter((f) => String(f.cod_responsavel) === String(codEdicao)).forEach((f) => adicionarCrianca(f));
+      // crianças em que ele é o segundo responsável: aparecem só para consulta
+      filhos.filter((f) => String(f.cod_responsavel) !== String(codEdicao)).forEach(mostrarCriancaCompartilhada);
       if (params.get("nova")) {
         const b = adicionarCrianca();
         b.scrollIntoView({ behavior: "smooth", block: "center" });

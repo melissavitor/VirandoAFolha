@@ -101,7 +101,7 @@ async function iniciarResponsavel(usuario) {
 
     document.getElementById("minhasCriancas").innerHTML = criancas.length
       ? `<ul class="lista-simples">${criancas.map((c) => `<li><span><span class="nome-forte">${escapar(c.nome)}</span><br>
-          <span class="suave pequeno">${idadeTexto(c.data_nascimento)}${c.observacoes ? " - " + escapar(c.observacoes) : ""}</span></span></li>`).join("")}</ul>`
+          <span class="suave pequeno">${idadeTexto(c.data_nascimento)}${c.observacoes ? " - " + escapar(c.observacoes) : ""}${String(c.cod_responsavel) !== String(usuario.cod_responsavel) ? " - responsável principal: " + escapar(c.responsavel_nome) : ""}</span></span></li>`).join("")}</ul>`
       : `<div class="vazio"><strong>Nenhuma criança cadastrada</strong><p>Cadastre quem vai frequentar a brinquedoteca.</p>
          <a class="btn btn-primario" href="cadastro.html?nova=1">Cadastrar criança</a></div>`;
 
