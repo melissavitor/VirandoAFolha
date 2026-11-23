@@ -108,20 +108,6 @@ CREATE TABLE CRIANCA (
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
--- TELEFONE_CRIANCA (atributo multivalorado de CRIANCA)
--- ---------------------------------------------------------------------
-CREATE TABLE TELEFONE_CRIANCA (
-  cod_responsavel INT         NOT NULL,
-  num_sequencial  INT         NOT NULL,
-  telefone        VARCHAR(15) NOT NULL,
-  PRIMARY KEY (cod_responsavel, num_sequencial, telefone),
-  CONSTRAINT fk_telcrianca_crianca FOREIGN KEY (cod_responsavel, num_sequencial)
-    REFERENCES CRIANCA (cod_responsavel, num_sequencial)
-    ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT ck_telcrianca_tel CHECK (telefone REGEXP '^[0-9]{1,15}$')
-) ENGINE=InnoDB;
-
--- ---------------------------------------------------------------------
 -- RESPONSAVEL_ADICIONAL (2o responsavel, opcional, de uma crianca)
 -- Regras (adicional <> principal e maximo de 1 adicional): triggers.
 -- ---------------------------------------------------------------------

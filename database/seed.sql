@@ -64,11 +64,6 @@ INSERT INTO CRIANCA (cod_responsavel, nome, data_nascimento, observacoes) VALUES
 (2, 'Arthur Pereira Santos',  '2019-02-11', 'Usa oculos'),
 (3, 'Laura Oliveira Costa',   '2021-12-01', NULL);
 
-INSERT INTO TELEFONE_CRIANCA (cod_responsavel, num_sequencial, telefone) VALUES
-(1, 1, '31988880001'),
-(2, 1, '31988880002'),
-(3, 1, '31988880003');
-
 -- Segundo responsavel (opcional): Carlos tambem responde pelo Miguel
 INSERT INTO RESPONSAVEL_ADICIONAL (cod_responsavel, num_sequencial, cod_responsavel_adicional) VALUES
 (1, 1, 2);
