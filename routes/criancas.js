@@ -3,7 +3,7 @@ const db = require("../db");
 const transacao = require("../utils/transacao");
 const { erroHttp, tratarErro } = require("../utils/erros");
 const {
-  validarPessoa, normalizarTelefones, telefonesEmLista, verificarCpfLivre, inserirPessoa, salvarTelefonesPessoa,
+  validarPessoa, normalizarTelefones, verificarCpfLivre, inserirPessoa, salvarTelefonesPessoa,
 } = require("../utils/pessoa");
 const { gerarHash } = require("../utils/sessao");
 const acessos = require("../utils/acessos");
@@ -13,16 +13,12 @@ const router = express.Router();
 // A chave da criança é composta: (cod_responsavel, num_sequencial).
 // Por isso as rotas de uma criança são  /criancas/:cod_responsavel/:num_sequencial
 
-// SELECT base: criança + responsável principal + 2º responsável (se existir) + telefones
+// SELECT base: criança + responsável principal + 2º responsável (se existir)
 const SELECT_CRIANCA = `
   SELECT c.cod_responsavel, c.num_sequencial, c.nome, c.data_nascimento, c.observacoes,
          CONCAT(p.primeiro_nome, ' ', p.sobrenome) AS responsavel_nome,
          ra.cod_responsavel_adicional,
-         CONCAT(pa.primeiro_nome, ' ', pa.sobrenome) AS responsavel_adicional_nome,
-         (SELECT GROUP_CONCAT(t.telefone ORDER BY t.telefone SEPARATOR ',')
-            FROM TELEFONE_CRIANCA t
-           WHERE t.cod_responsavel = c.cod_responsavel
-             AND t.num_sequencial = c.num_sequencial) AS telefones
+         CONCAT(pa.primeiro_nome, ' ', pa.sobrenome) AS responsavel_adicional_nome
     FROM CRIANCA c
     JOIN RESPONSAVEL r ON r.cod_responsavel = c.cod_responsavel
     JOIN PESSOA p ON p.cpf = r.cpf
@@ -30,10 +26,6 @@ const SELECT_CRIANCA = `
            ON ra.cod_responsavel = c.cod_responsavel AND ra.num_sequencial = c.num_sequencial
     LEFT JOIN RESPONSAVEL rad ON rad.cod_responsavel = ra.cod_responsavel_adicional
     LEFT JOIN PESSOA pa ON pa.cpf = rad.cpf`;
-
-function formatar(linha) {
-  return { ...linha, telefones: telefonesEmLista(linha.telefones) };
-}
 
 function validarCrianca(corpo) {
   const nome = (corpo.nome || "").trim();
@@ -45,21 +37,7 @@ function validarCrianca(corpo) {
     observacoes: (corpo.observacoes || "").trim() || null,
     // undefined = a tela não mexeu no 2º responsável (então não mexemos); null = tirar o 2º responsável
     adicional: corpo.cod_responsavel_adicional === undefined ? undefined : (corpo.cod_responsavel_adicional ? Number(corpo.cod_responsavel_adicional) : null),
-    telefones: normalizarTelefones(corpo.telefones),
   };
-}
-
-async function salvarTelefonesCrianca(conn, cod, num, telefones) {
-  await conn.query(
-    "DELETE FROM TELEFONE_CRIANCA WHERE cod_responsavel = ? AND num_sequencial = ?",
-    [cod, num]
-  );
-  for (const telefone of telefones) {
-    await conn.query(
-      "INSERT INTO TELEFONE_CRIANCA (cod_responsavel, num_sequencial, telefone) VALUES (?, ?, ?)",
-      [cod, num, telefone]
-    );
-  }
 }
 
 // Troca o 2º responsável (apaga o vínculo antigo e cria o novo, se foi informado)
@@ -91,7 +69,7 @@ router.get("/", async (req, res) => {
       parametros.push(doResponsavel);
     }
     const [linhas] = await db.query(sql + " ORDER BY c.nome", parametros);
-    res.json(linhas.map(formatar));
+    res.json(linhas);
   } catch (erro) {
     tratarErro(erro, res);
   }
@@ -191,7 +169,7 @@ router.get("/:cod_responsavel/:num_sequencial", async (req, res) => {
     if (linhas.length === 0) {
       return res.status(404).json({ mensagem: "Criança não encontrada" });
     }
-    res.json(formatar(linhas[0]));
+    res.json(linhas[0]);
   } catch (erro) {
     tratarErro(erro, res);
   }
@@ -213,7 +191,6 @@ router.post("/", async (req, res) => {
         "SELECT MAX(num_sequencial) AS num FROM CRIANCA WHERE cod_responsavel = ?",
         [cod]
       );
-      if (req.body.telefones !== undefined) await salvarTelefonesCrianca(conn, cod, ultimo.num, c.telefones);
       if (c.adicional !== undefined) await salvarAdicional(conn, cod, ultimo.num, c.adicional);
       return ultimo.num;
     });
@@ -241,7 +218,6 @@ router.put("/:cod_responsavel/:num_sequencial", async (req, res) => {
         "UPDATE CRIANCA SET nome = ?, data_nascimento = ?, observacoes = ? WHERE cod_responsavel = ? AND num_sequencial = ?",
         [c.nome, c.data_nascimento, c.observacoes, cod, num]
       );
-      if (req.body.telefones !== undefined) await salvarTelefonesCrianca(conn, cod, num, c.telefones);   // a tela não pede mais o telefone da criança
       if (c.adicional !== undefined) await salvarAdicional(conn, cod, num, c.adicional);
     });
 
@@ -251,7 +227,7 @@ router.put("/:cod_responsavel/:num_sequencial", async (req, res) => {
   }
 });
 
-// DELETE - telefones e 2º responsável saem junto (CASCADE); atendimentos impedem
+// DELETE - o 2º responsável sai junto (CASCADE); atendimentos impedem
 router.delete("/:cod_responsavel/:num_sequencial", async (req, res) => {
   try {
     const [r] = await db.query(
