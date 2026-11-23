@@ -65,9 +65,9 @@ Pré-requisitos: [Node.js](https://nodejs.org) (versão LTS) e MySQL 8.
 
 1. Abra o MySQL Workbench e conecte no seu servidor.
 2. Abra `database/schema.sql`, execute tudo (raio) e depois `database/seed.sql`.
-3. Confira: `SELECT * FROM ACESSO;` deve mostrar 4 linhas (os funcionários).
+3. Confira: `SELECT * FROM ACESSO;` deve mostrar 5 linhas (os funcionários).
 
-> Já tinha o banco criado de antes? Rode só `database/migracao_acesso.sql` para ganhar a tabela `ACESSO`, sem perder dados.
+> Já tinha o banco criado de antes? O `schema.sql` recria o banco do zero (apaga o que existir em `brinquedoteca`). Depois rode o `seed.sql` de novo.
 
 ### 2. Rodar o sistema
 
@@ -116,10 +116,11 @@ O login é pelo CPF do funcionário. A senha de todos é `folha123`.
 | João | Recepcionista | 222.333.444-02 | Atendimentos, cadastros e eventos |
 | Camila | Monitora | 222.333.444-03 | Atendimentos, cadastros e eventos |
 | Rafael | Monitor | 222.333.444-04 | Atendimentos, cadastros e eventos |
+| Patrícia | Recepcionista | 222.333.444-05 | Atendimentos, cadastros e eventos |
 
 **Responsável (cliente):** não precisa de CPF pré-cadastrado. Na tela de login, **Crie sua conta** pede os dados e uma senha (mínimo 6 caracteres) e já entra. Depois, o responsável cadastra as crianças, pede um evento (nasce como orçamento, com preços do catálogo) e acompanha tudo em **Meus eventos**. Ele só vê o que é dele; a coordenação confirma o evento e escala a equipe.
 
-As senhas ficam no banco, na tabela `ACESSO` (CPF, hash da senha e perfil). Nunca é gravada a senha pura. A coordenação cria ou troca senhas na tela Funcionários. Quem já tem o banco criado antes dessa tabela pode rodar `database/migracao_acesso.sql`, que adiciona a `ACESSO` sem apagar dados.
+As senhas ficam no banco, na tabela `ACESSO` (CPF, hash da senha e perfil). Nunca é gravada a senha pura. A coordenação cria ou troca senhas na tela Funcionários.
 
 A fonte dos títulos é a Jennies House. Coloque o arquivo em `public/assets/comum/fonts/` e tire os comentários de `public/assets/comum/css/fontes.css`. Sem ela, os títulos usam a Barlow Condensed.
 
@@ -189,8 +190,8 @@ Um evento passa por três status:
 ├── .env.example         modelo das variáveis de ambiente
 ├── database/
 │   ├── schema.sql       criação das tabelas (inclui ACESSO, o login) e triggers
-│   ├── migracao_acesso.sql  só cria a ACESSO num banco que já existe
-│   └── seed.sql         dados de exemplo
+│   ├── seed.sql         dados de exemplo (5 ou mais registros em cada tabela)
+│   └── consultas.sql    10 consultas da Fase 3 de Banco de Dados
 ├── routes/              uma rota por assunto
 │   ├── auth.js          login, logout e troca de senha
 │   ├── painel.js        números da tela inicial
@@ -250,7 +251,7 @@ O banco `brinquedoteca` segue o projeto lógico do grupo (Fase 2), com tabelas n
 | Grupo | Tabelas | Para que serve |
 |---|---|---|
 | Pessoas | `PESSOA`, `TELEFONE_PESSOA` | Dados comuns (CPF, nome, nascimento, endereço) e telefones |
-| Clientes | `RESPONSAVEL`, `CRIANCA`, `TELEFONE_CRIANCA`, `RESPONSAVEL_ADICIONAL` | Responsável, crianças (com observações) e o segundo responsável |
+| Clientes | `RESPONSAVEL`, `CRIANCA`, `RESPONSAVEL_ADICIONAL` | Responsável, crianças (com observações) e o segundo responsável |
 | Equipe | `FUNCIONARIO`, `RECEPCIONISTA`, `MONITOR` | Funcionário e seus papéis |
 | Atendimento | `ATENDIMENTO`, `ACOMPANHA` | Entrada, saída, valor, pagamento e monitores que acompanham |
 | Eventos | `EVENTO`, `FICHA_BRIEFING`, `SERVICO`, `CONTRATACAO`, `PARTICIPACAO`, `CHECKLIST_EVENTO` | Evento, briefing, serviços contratados, equipe escalada e checklists |
@@ -325,7 +326,7 @@ A criança é identificada por **responsável + número sequencial** (`num_seque
 2. No `estilo.css`, importe os CSS comuns (veja os existentes). No `script.js`, use `chamarApi()`.
 3. Inclua a página em `ITENS_MENU` (e em `ITENS_RESPONSAVEL`, se o cliente puder usar) no `layout.js`.
 
-**Mudar uma regra do banco:** altere o `schema.sql` (para quem cria do zero) e escreva um `.sql` de migração para quem já tem o banco, como foi feito em `migracao_acesso.sql`.
+**Mudar uma regra do banco:** altere o `schema.sql` (para quem cria do zero) e escreva um `.sql` de migração para quem já tem o banco.
 
 **Cores da marca** (em `assets/comum/css/base.css`): verde `#679B72`, coral `#E86F63`, amarelo `#EDC047`, lilás `#8F80A8`, laranja `#FEA85B`, azul `#516E9E` e off-white `#FCFBF8`. Fontes: Rubik (texto) e Barlow Condensed (títulos).
 
@@ -377,7 +378,7 @@ A GitHub Pages **não** serve: ela só hospeda páginas estáticas e este sistem
 |---|---|
 | `Access denied for user` | A senha do `.env` (`DB_PASSWORD`) não é a do seu MySQL. |
 | `Unknown database 'brinquedoteca'` | Você ainda não rodou o `schema.sql`. |
-| `Table 'ACESSO' doesn't exist` | Rode `database/migracao_acesso.sql`. |
+| `Table 'ACESSO' doesn't exist` | Rode o `database/schema.sql` inteiro e depois o `seed.sql`. |
 | `EADDRINUSE` (porta em uso) | Outra coisa usa a porta 3000. Troque `PORT` no `.env` ou feche o outro programa. |
 | `CPF ou senha incorretos` | Use os CPFs da seção Logins para testar (senha `folha123`) ou crie uma conta de responsável. |
 | Tela sem estilo ou sem dados | Abra pelo endereço do servidor (http://localhost:3000), não pelo arquivo `.html` direto. |
